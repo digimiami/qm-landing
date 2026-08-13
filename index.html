@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Diazites — Your AI Back-Office Employee | Never Miss Another Lead</title>
+<meta name="description" content="Your AI voice agent answers every call. Your AI back-office employee follows up every lead, sends the reminders, and remembers every customer — 24/7, in writing.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<meta property="og:title" content="Diazites — Your AI Back-Office Employee">
+<meta property="og:description" content="AI that answers every call, follows up every lead, and never forgets a customer. 24/7, in writing.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://qm.diazites.online/">
+<meta property="og:image" content="https://qm.diazites.online/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Diazites — Your AI Back-Office Employee">
+<meta name="twitter:description" content="AI that answers every call, follows up every lead, and never forgets a customer. 24/7, in writing.">
+<meta name="twitter:image" content="https://qm.diazites.online/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#080b12; --bg2:#0b1019; --card:#0e1524; --card2:#0a101c; --line:rgba(148,163,184,.14);
+    --txt:#eef2f9; --mut:#8b96ab; --dim:#5b6478;
+    --acc:#4f8cff; --acc-2:#6ee7b7; --acc-glow:rgba(79,140,255,.35);
+    --grad:linear-gradient(135deg,#4f8cff 0%,#6ee7b7 100%);
+    --warn:#ffb454; --danger:#ff7b9c;
+    --radius:14px; --radius-sm:9px;
+    --shadow-lg:0 30px 60px -20px rgba(0,0,0,.55), 0 18px 36px -18px rgba(0,0,0,.5);
+    --shadow-blue:rgba(50,50,93,.25) 0 30px 45px -30px, rgba(0,0,0,.1) 0 18px 36px -18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;overflow-x:hidden;width:100%;max-width:100vw}
+  body{background:var(--bg);color:var(--txt);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%;max-width:100vw;position:relative;-webkit-overflow-scrolling:touch;overscroll-behavior:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  ::selection{background:rgba(79,140,255,.35)}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  @media(max-width:640px){.wrap{padding:0 18px}}
+
+  /* ambient background */
+  .bgfx{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+  .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.32;animation:drift 22s ease-in-out infinite alternate}
+  .orb-1{width:560px;height:560px;background:radial-gradient(circle,#4f8cff,transparent 65%);top:-180px;left:-120px}
+  .orb-2{width:520px;height:520px;background:radial-gradient(circle,#6ee7b7,transparent 65%);top:35%;right:-200px;animation-delay:-8s}
+  .orb-3{width:420px;height:420px;background:radial-gradient(circle,#7c5cff,transparent 65%);bottom:-160px;left:30%;animation-delay:-15s;opacity:.22}
+  @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,-40px) scale(1.12)}}
+  .gridfx{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(rgba(148,163,184,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.05) 1px,transparent 1px);
+    background-size:52px 52px;
+    mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 30%,transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 30%,transparent 75%)}
+
+  /* header */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(8,11,18,.72);border-bottom:1px solid transparent;transition:border-color .3s, background .3s}
+  header.scrolled{border-bottom-color:var(--line);background:rgba(8,11,18,.88)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:.2px;text-decoration:none}
+  .logo-mark{width:30px;height:30px;border-radius:8px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px var(--acc-glow)}
+  .logo-mark svg{width:16px;height:16px}
+  .logo span{color:var(--acc)}
+  .nav-links{display:flex;align-items:center;gap:28px;font-size:14px;font-weight:500}
+  .nav-links a{color:var(--mut);text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--txt)}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .nav-burger{display:none;background:none;border:1px solid var(--line);border-radius:8px;color:var(--txt);font-size:20px;width:40px;height:40px;cursor:pointer}
+  @media(max-width:820px){
+    .nav-links{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(8,11,18,.98);flex-direction:column;gap:6px;padding:18px 24px 24px;border-bottom:1px solid var(--line);font-size:16px}
+    .nav-links.open{display:flex}
+    .nav-links a{padding:10px 0;width:100%}
+    .nav-burger{display:block}
+    .nav-cta .btn{display:none}
+    .nav-cta .btn.show-mobile{display:inline-flex}
+  }
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 22px;border-radius:var(--radius-sm);font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;border:1px solid transparent;transition:transform .15s, box-shadow .2s, background .2s, border-color .2s;white-space:nowrap}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-p{background:var(--grad);color:#fff;box-shadow:0 4px 22px var(--acc-glow)}
+  .btn-p:hover{box-shadow:0 6px 30px var(--acc-glow)}
+  .btn-g{background:rgba(255,255,255,.03);color:var(--txt);border-color:var(--line)}
+  .btn-g:hover{border-color:var(--acc);background:rgba(79,140,255,.08)}
+  .btn-lg{padding:15px 30px;font-size:16px;border-radius:11px}
+
+  /* hero */
+  .hero{position:relative;padding:88px 0 72px;text-align:center}
+  .badge{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:12.5px;font-weight:600;color:var(--mut);letter-spacing:.4px;text-transform:uppercase;margin-bottom:26px}
+  .badge .live-dot{width:7px;height:7px;border-radius:50%;background:var(--acc-2);box-shadow:0 0 0 0 rgba(110,231,183,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(110,231,183,.6)}70%{box-shadow:0 0 0 9px rgba(110,231,183,0)}100%{box-shadow:0 0 0 0 rgba(110,231,183,0)}}
+  .hero h1{font-size:clamp(34px,5.6vw,60px);line-height:1.08;font-weight:800;letter-spacing:-1.6px;margin-bottom:22px}
+  .hero h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .hero .sub{max-width:660px;margin:0 auto 34px;color:var(--mut);font-size:clamp(16px,2vw,19px);font-weight:400}
+  .hero .sub b{color:#c9d4e6;font-weight:600}
+  .cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:46px}
+  .hero-note{font-size:13px;color:var(--dim);margin-top:14px}
+
+  /* live timeline demo card */
+  .demo-wrap{position:relative;max-width:860px;margin:0 auto}
+  .demo{position:relative;background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lg);overflow:hidden;text-align:left}
+  .demo::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--acc),transparent);opacity:.7}
+  .demo-bar{display:flex;align-items:center;gap:8px;padding:13px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .demo-dots{display:flex;gap:6px}
+  .demo-dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+  .demo-dots i:nth-child(1){background:#ff5f57}.demo-dots i:nth-child(2){background:#febc2e}.demo-dots i:nth-child(3){background:#28c840}
+  .demo-title{font-size:12.5px;color:var(--mut);font-weight:600;letter-spacing:.3px;margin-left:6px}
+  .demo-status{margin-left:auto;font-size:11px;font-weight:700;color:var(--acc-2);display:flex;align-items:center;gap:6px;letter-spacing:.5px;text-transform:uppercase}
+  .demo-status i{width:6px;height:6px;border-radius:50%;background:var(--acc-2);animation:pulse 1.8s infinite}
+  .demo-body{padding:8px 0 4px;min-height:290px}
+  .feed-item{display:flex;gap:14px;padding:13px 20px;border-bottom:1px dashed rgba(148,163,184,.09);opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s ease}
+  .feed-item.show{opacity:1;transform:translateY(0)}
+  .feed-ic{width:34px;height:34px;border-radius:9px;flex:0 0 34px;display:flex;align-items:center;justify-content:center;font-size:15px;background:rgba(79,140,255,.12);border:1px solid rgba(79,140,255,.22)}
+  .feed-ic.g{background:rgba(110,231,183,.1);border-color:rgba(110,231,183,.22)}
+  .feed-ic.w{background:rgba(255,180,84,.1);border-color:rgba(255,180,84,.22)}
+  .feed-txt{font-size:13.5px;color:#b9c4d8;line-height:1.5}
+  .feed-txt b{color:var(--txt);font-weight:600}
+  .feed-txt .time{color:var(--dim);font-size:11.5px;font-weight:500;font-variant-numeric:tabular-nums}
+  .feed-txt .typing::after{content:'▍';color:var(--acc);animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .feed-tag{display:inline-block;padding:2px 9px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.3px;margin-right:7px;vertical-align:1px}
+  .feed-tag.in{background:rgba(110,231,183,.13);color:var(--acc-2)}
+  .feed-tag.out{background:rgba(79,140,255,.14);color:#7faaff}
+  .feed-tag.auto{background:rgba(255,180,84,.13);color:var(--warn)}
+  .demo-foot{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,.25);font-size:12.5px;color:var(--dim)}
+  .demo-foot b{color:var(--acc-2);font-weight:700}
+
+  /* stats strip */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:860px;margin:56px auto 0;text-align:center}
+  .stat{padding:22px 12px;border-radius:var(--radius);border:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .stat .n{font-size:30px;font-weight:800;letter-spacing:-.8px;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .stat .l{font-size:12.5px;color:var(--mut);margin-top:4px;font-weight:500}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* sections */
+  section{padding:84px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 52px}
+  .sec-eyebrow{font-size:12px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--acc);margin-bottom:14px}
+  .sec-head h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.9px;line-height:1.15;margin-bottom:14px}
+  .sec-head p{color:var(--mut);font-size:16px}
+
+  /* features grid */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .feat{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;transition:transform .2s, border-color .2s, box-shadow .2s}
+  .feat:hover{transform:translateY(-3px);border-color:rgba(79,140,255,.45);box-shadow:0 16px 40px -18px var(--acc-glow)}
+  .feat-ic{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:16px;background:rgba(79,140,255,.12);border:1px solid rgba(79,140,255,.25)}
+  .feat h3{font-size:16.5px;font-weight:700;margin-bottom:8px;letter-spacing:-.2px}
+  .feat p{font-size:13.5px;color:var(--mut);line-height:1.55}
+  @media(max-width:900px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.feat-grid{grid-template-columns:1fr}}
+
+  /* how it works */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:step}
+  .step{position:relative;padding:28px 24px;border-radius:var(--radius);border:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .step::before{counter-increment:step;content:'0' counter(step);position:absolute;top:22px;right:22px;font-size:30px;font-weight:800;letter-spacing:-1px;color:rgba(148,163,184,.14)}
+  .step h3{font-size:16.5px;font-weight:700;margin-bottom:8px}
+  .step p{font-size:13.5px;color:var(--mut)}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+
+  /* industries */
+  .ind-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:860px;margin:0 auto}
+  .ind{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.02);font-size:13.5px;font-weight:600;color:#c3cddd;transition:border-color .2s, transform .2s}
+  .ind:hover{border-color:var(--acc);transform:translateY(-2px)}
+  .ind .em{font-size:16px}
+
+  /* pricing */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+  .plan{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:18px;padding:30px 26px;transition:transform .2s, box-shadow .2s}
+  .plan:hover{transform:translateY(-3px)}
+  .plan.pop{border-color:rgba(79,140,255,.6);box-shadow:0 0 0 1px rgba(79,140,255,.5) inset, 0 20px 50px -24px var(--acc-glow)}
+  .plan.pop .pop-tag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:999px;white-space:nowrap;box-shadow:0 4px 16px var(--acc-glow)}
+  .plan .tag{font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--mut)}
+  .plan.pop .tag{color:var(--acc)}
+  .plan h3{font-size:21px;margin:7px 0 3px;font-weight:800;letter-spacing:-.4px}
+  .plan .price{font-size:38px;font-weight:800;letter-spacing:-1.2px;margin:10px 0 2px;font-variant-numeric:tabular-nums}
+  .plan .price small{font-size:14px;color:var(--mut);font-weight:500;letter-spacing:0}
+  .plan .desc{color:var(--mut);font-size:13.5px;margin-bottom:16px;min-height:42px}
+  .plan ul{list-style:none;flex:1;margin:0 0 22px}
+  .plan li{font-size:13.5px;padding:6px 0 6px 24px;position:relative;color:#c7d0e0}
+  .plan li:before{content:'✓';position:absolute;left:0;color:var(--acc-2);font-weight:800}
+  .plan form{margin-top:auto;display:flex;flex-direction:column;gap:9px}
+  .plan input[type=email]{width:100%;padding:12px 14px;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--card2);color:var(--txt);font-size:14px;transition:border-color .2s}
+  .plan input[type=email]:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 3px rgba(79,140,255,.15)}
+  .plan input[type=email]::placeholder{color:var(--dim)}
+  .plan .btn{width:100%}
+  @media(max-width:900px){.plans{grid-template-columns:1fr;max-width:460px;margin:0 auto}.plan.pop{order:-1}}
+
+  /* faq */
+  .faq{max-width:720px;margin:0 auto}
+  .faq-item{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:rgba(255,255,255,.02);overflow:hidden}
+  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 20px;background:none;border:0;color:var(--txt);font-size:15px;font-weight:600;cursor:pointer;text-align:left;font-family:inherit}
+  .faq-q .chev{flex:0 0 auto;color:var(--mut);transition:transform .25s;font-size:13px}
+  .faq-item.open .chev{transform:rotate(180deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .faq-a-inner{padding:0 20px 18px;color:var(--mut);font-size:14px;line-height:1.65}
+
+  /* final cta */
+  .final-cta{text-align:center;position:relative;padding:90px 0}
+  .final-box{position:relative;max-width:820px;margin:0 auto;border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(79,140,255,.08),transparent 60%),var(--card);padding:60px 40px;overflow:hidden}
+  .final-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--acc),transparent)}
+  .final-box h2{font-size:clamp(26px,3.8vw,40px);font-weight:800;letter-spacing:-1px;margin-bottom:14px}
+  .final-box p{color:var(--mut);max-width:520px;margin:0 auto 30px;font-size:16px}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:44px 0 54px;background:rgba(0,0,0,.2)}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .foot .copy{color:var(--dim);font-size:13px}
+  .foot .links{display:flex;gap:22px;font-size:13.5px;color:var(--mut)}
+  .foot .links a{text-decoration:none;transition:color .2s}
+  .foot .links a:hover{color:var(--txt)}
+  .foot small{display:block;margin-top:8px;color:var(--dim);font-size:12px}
+
+  @media(max-width:600px){
+    section{padding:60px 0}
+    .hero{padding:64px 0 52px}
+    .hero h1{letter-spacing:-1px}
+    .demo-body{min-height:300px}
+  }
+
+  /* sticky mobile CTA bar */
+  .mobcta{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;align-items:center;justify-content:space-between;gap:12px;
+    padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));
+    background:rgba(8,11,18,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);transform:translateY(110%);transition:transform .3s ease}
+  .mobcta.show{transform:translateY(0)}
+  .mobcta .mt-txt{display:flex;flex-direction:column;line-height:1.3}
+  .mobcta .mt-txt b{font-size:14.5px;font-weight:800}
+  .mobcta .mt-txt small{font-size:11.5px;color:var(--mut);font-weight:500}
+  .mobcta .btn{flex:0 0 auto;padding:11px 20px;font-size:14px}
+  @media(max-width:600px){
+    .mobcta{display:flex}
+    body{padding-bottom:64px}
+  }
+</style>
+</head>
+<body>
+<div class="bgfx"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+<div class="gridfx"></div>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="logo" href="/">
+      <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+      Diazites<span>.</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#how">How it works</a>
+      <a href="#industries">Industries</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-g show-mobile" href="/auth/login">Sign in</a>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="badge"><span class="live-dot"></span> AI Back-Office Employee — Live 24/7</span>
+      <h1>Your voice agent takes the call.<br><span class="grad">This employee closes the loop.</span></h1>
+      <p class="sub">Your Diazites AI already answers every call and books the job. Now add the back-office employee that <b>never clocks out</b>: follows up every lead, sends the reminders, does the research, and remembers every customer — <b>in writing, 24/7</b>.</p>
+      <div class="cta-row">
+        <a class="btn btn-p btn-lg" href="/app">▶ Try it now — no sign-up</a>
+        <a class="btn btn-g btn-lg" href="#pricing">See plans</a>
+      </div>
+      <p class="hero-note">Free 5-minute test drive · No credit card · Your own private workspace</p>
+    </div>
+
+    <!-- LIVE TIMELINE DEMO -->
+    <div class="demo-wrap wrap" style="padding-top:8px">
+      <div class="demo">
+        <div class="demo-bar">
+          <div class="demo-dots"><i></i><i></i><i></i></div>
+          <span class="demo-title">Diazites Workspace — Maria's roof estimate</span>
+          <span class="demo-status"><i></i> Working</span>
+        </div>
+        <div class="demo-body" id="demoBody">
+          <div class="feed-item show">
+            <div class="feed-ic">📞</div>
+            <div class="feed-txt"><span class="time">3:12 PM</span> &nbsp;<span class="feed-tag in">INCOMING CALL</span> <b>Maria</b> — missed call while you were on another job.</div>
+          </div>
+          <div class="feed-item show">
+            <div class="feed-ic g">✉️</div>
+            <div class="feed-txt"><span class="time">3:12 PM</span> &nbsp;<span class="feed-tag out">SMS SENT</span> <b>“Hi Maria, sorry we missed you — got your call about a roof estimate. Quoting you now…”</b></div>
+          </div>
+          <div class="feed-item show">
+            <div class="feed-ic g">📋</div>
+            <div class="feed-txt"><span class="time">3:14 PM</span> &nbsp;<span class="feed-tag auto">LEAD CAPTURED</span> Service: <b>roof replacement</b> · Address: <b>Amherst, MA</b> · Urgency: <b>leak — this week</b></div>
+          </div>
+          <div class="feed-item" id="feedA">
+            <div class="feed-ic">🧮</div>
+            <div class="feed-txt"><span class="time">3:16 PM</span> &nbsp;<span class="feed-tag auto">QUOTE DRAFTED</span> <b class="typing">3-tab architectural shingle estimate — $8,450 incl. tear-off</b></div>
+          </div>
+          <div class="feed-item" id="feedB">
+            <div class="feed-ic g">📅</div>
+            <div class="feed-txt"><span class="time">3:18 PM</span> &nbsp;<span class="feed-tag out">SENT TO CUSTOMER</span> <b class="typing">Quote + 2 open slots this week for the crew</b></div>
+          </div>
+          <div class="feed-item" id="feedC">
+            <div class="feed-ic w">🔁</div>
+            <div class="feed-txt"><span class="time">6 mo later</span> &nbsp;<span class="feed-tag auto">RE-QUOTE ENGINE</span> <b class="typing">Reminder set — re-quote Maria in 6 months. Nobody lifted a finger.</b></div>
+          </div>
+        </div>
+        <div class="demo-foot"><span>⏱ This whole workflow ran <b>hands-free</b></span><span>📈 0 missed leads</span></div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="wrap">
+      <div class="stats">
+        <div class="stat"><div class="n">24/7</div><div class="l">Answers every call</div></div>
+        <div class="stat"><div class="n">&lt;5 min</div><div class="l">Follow-up on every lead</div></div>
+        <div class="stat"><div class="n">∞</div><div class="l">Customer memory</div></div>
+        <div class="stat"><div class="n">$0</div><div class="l">Extra headcount</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Capabilities</div>
+        <h2>One employee. Every back-office chore.</h2>
+        <p>Everything a receptionist + admin assistant + bookkeeper's reminder list does — automated, in writing, on your timeline.</p>
+      </div>
+      <div class="feat-grid">
+        <div class="feat"><div class="feat-ic">📞</div><h3>Answers every call</h3><p>Your AI voice agent picks up 24/7 — books jobs, answers questions, and texts the customer before you're off the ladder.</p></div>
+        <div class="feat"><div class="feat-ic">✉️</div><h3>Follows up every lead</h3><p>Missed calls, web forms, quotes sent — every lead gets an instant written follow-up, and no lead falls through the crack.</p></div>
+        <div class="feat"><div class="feat-ic">🧠</div><h3>Remembers every customer</h3><p>Every conversation, preference, and job history is kept. Ask it anything about any customer, anytime.</p></div>
+        <div class="feat"><div class="feat-ic">📄</div><h3>Sends quotes &amp; reminders</h3><p>Drafts quotes, sends appointment reminders, and follows up on estimates — automatically, in your voice.</p></div>
+        <div class="feat"><div class="feat-ic">🔁</div><h3>Re-quote engine</h3><p>Old estimates get re-quoted on schedule. Roofs, ACs, driveways — the work you already priced comes back around.</p></div>
+        <div class="feat"><div class="feat-ic">🔎</div><h3>Research &amp; scheduled tasks</h3><p>Give it a task — research suppliers, prep job sheets, draft follow-ups — and it works on your schedule, in writing.</p></div>
+        <div class="feat"><div class="feat-ic">🔐</div><h3>Your private workspace</h3><p>A secure, dedicated AI workspace for your business. Your data, your scripts, your voice — never shared.</p></div>
+        <div class="feat"><div class="feat-ic">🧰</div><h3>Skill library</h3><p>Plug in ready-made skills — dealership paperwork, lead qualification, and more — or build your own workflows.</p></div>
+        <div class="feat"><div class="feat-ic">📊</div><h3>In writing, always</h3><p>Every action is logged in your workspace. See exactly what your employee did, when, and what it sent.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" style="background:rgba(255,255,255,.015);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-eyebrow">How it works</div>
+        <h2>Live in under 5 minutes</h2>
+        <p>No IT team. No contracts to read. If you can type an email, you can hire your AI employee.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><h3>The call comes in</h3><p>Your AI voice agent answers with your voice, your script — books the job, takes the details, texts the customer.</p></div>
+        <div class="step"><h3>The employee takes over</h3><p>Every lead is followed up in writing: quotes drafted, reminders sent, customers remembered — all logged in your workspace.</p></div>
+        <div class="step"><h3>You just do the work</h3><p>Show up to booked jobs and paid invoices. The employee keeps the pipeline full and the customers coming back.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section id="industries">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Industries</div>
+        <h2>Built for local businesses</h2>
+        <p>If you book jobs over the phone, this pays for itself in the first week.</p>
+      </div>
+      <div class="ind-strip">
+        <span class="ind"><span class="em">🏠</span> Roofing</span>
+        <span class="ind"><span class="em">❄️</span> HVAC</span>
+        <span class="ind"><span class="em">🔌</span> Electricians</span>
+        <span class="ind"><span class="em">🚿</span> Plumbers</span>
+        <span class="ind"><span class="em">🏗️</span> Contractors</span>
+        <span class="ind"><span class="em">🚗</span> Auto repair</span>
+        <span class="ind"><span class="em">🪵</span> Landscaping</span>
+        <span class="ind"><span class="em">🧼</span> Cleaning</span>
+        <span class="ind"><span class="em">🦷</span> Dental</span>
+        <span class="ind"><span class="em">🏥</span> Medical offices</span>
+        <span class="ind"><span class="em">⚖️</span> Legal</span>
+        <span class="ind"><span class="em">🏢</span> Real estate</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" style="border-top:1px solid var(--line)">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-eyebrow">Pricing</div>
+        <h2>Cheaper than one missed job</h2>
+        <p>Flat monthly pricing. No setup fees, no per-call surprises. Cancel anytime.</p>
+      </div>
+      <div class="plans">
+        <div class="plan">
+          <div class="tag">Starter</div>
+          <h3>Voice Agent</h3>
+          <div class="price">$97<small>/mo</small></div>
+          <div class="desc">The AI receptionist — answers 24/7, books jobs, texts customers.</div>
+          <ul>
+            <li>AI answers every call</li>
+            <li>Books jobs &amp; sends confirmations</li>
+            <li>Missed-call auto-SMS</li>
+            <li>Your voice, your script</li>
+          </ul>
+          <form action="/qm-checkout" method="get">
+            <input type="hidden" name="plan" value="starter">
+            <input type="email" name="email" placeholder="you@yourbusiness.com" required>
+            <button class="btn btn-g" type="submit">Get Starter — $97/mo</button>
+          </form>
+        </div>
+
+        <div class="plan pop">
+          <div class="pop-tag">Most popular</div>
+          <div class="tag">Pro</div>
+          <h3>Back-Office Employee</h3>
+          <div class="price">$297<small>/mo</small></div>
+          <div class="desc">Voice + the employee that keeps working after the call.</div>
+          <ul>
+            <li>Everything in Starter</li>
+            <li>Follows up every lead in writing</li>
+            <li>Remembers every customer &amp; conversation</li>
+            <li>Sends quotes, reminders, re-quotes</li>
+            <li>Research &amp; scheduled tasks</li>
+            <li>Your own private AI workspace</li>
+          </ul>
+          <form action="/qm-checkout" method="get">
+            <input type="hidden" name="plan" value="pro">
+            <input type="email" name="email" placeholder="you@yourbusiness.com" required>
+            <button class="btn btn-p" type="submit">Get Pro — $297/mo</button>
+          </form>
+        </div>
+
+        <div class="plan">
+          <div class="tag">Premium</div>
+          <h3>Multi-Line + Automation</h3>
+          <div class="price">$497<small>/mo</small></div>
+          <div class="desc">Pro, multiplied across your locations and niches.</div>
+          <ul>
+            <li>Everything in Pro</li>
+            <li>Multiple phone lines</li>
+            <li>Custom niche automations</li>
+            <li>Re-quote engine (old estimates)</li>
+            <li>Priority onboarding &amp; support</li>
+          </ul>
+          <form action="/qm-checkout" method="get">
+            <input type="hidden" name="plan" value="premium">
+            <input type="email" name="email" placeholder="you@yourbusiness.com" required>
+            <button class="btn btn-g" type="submit">Get Premium — $497/mo</button>
+          </form>
+        </div>
+      </div>
+      <p style="text-align:center;color:var(--dim);font-size:13px;margin-top:22px">🔒 Secure checkout · 14-day satisfaction guarantee · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="sec-eyebrow">FAQ</div>
+        <h2>Questions, answered</h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">What exactly is the AI Back-Office Employee?<span class="chev">▾</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Your Diazites AI voice agent answers calls and books jobs. The back-office employee keeps working <b>after</b> the call — it follows up leads in writing, drafts and sends quotes, sets reminders, re-quotes old estimates, and keeps a written memory of every customer. It works 24/7 and never clocks out.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">How is this different from a call-answering service?<span class="chev">▾</span></button>
+          <div class="faq-a"><div class="faq-a-inner">A service just answers. Diazites <b>closes the loop</b>: the call is answered, the lead is qualified, the quote is drafted, the reminder is sent, and the follow-up is scheduled — all automatically, all in writing, all logged in your workspace. It's an employee, not a switchboard.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I try it before paying?<span class="chev">▾</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes — hit <b>“Try it now”</b> and you'll be in a live playground in seconds, no sign-up, no credit card. Build a workflow, ask it questions, and see it work before you buy.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Does it use my own voice and scripts?<span class="chev">▾</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes. Your voice agent speaks with your chosen voice and follows your script, so calls sound like your business — not a robot. You're in control of what it says and how it handles every situation.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Is my business data private?<span class="chev">▾</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Your workspace is private and dedicated to your business. Customer conversations, job history, and files stay in your workspace — never mixed with other businesses.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">Can I cancel anytime?<span class="chev">▾</span></button>
+          <div class="faq-a"><div class="faq-a-inner">Yes — flat monthly pricing, cancel anytime, no contracts and no per-call fees. If it doesn't pay for itself in the first month, that's on us.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="wrap">
+      <div class="final-box">
+        <h2>Never miss another lead.<br>Never forget a customer.</h2>
+        <p>Your AI employee is ready to start tonight. Try it free, then hire it when it's paid for itself.</p>
+        <div class="cta-row" style="margin-bottom:0">
+          <a class="btn btn-p btn-lg" href="/app">▶ Try it free — no sign-up</a>
+          <a class="btn btn-g btn-lg" href="#pricing">See plans</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="copy">© <span id="yr">2026</span> Diazites — AI voice &amp; back-office agents for local businesses.</div>
+      <div class="links">
+        <a href="/auth/login">Sign in</a>
+        <a href="mailto:diazites.ai@gmail.com">Contact</a>
+        <a href="#pricing">Plans</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+    <small>Diazites is a white-label platform — your brand, your business, your customers.</small>
+  </div>
+</footer>
+
+<!-- sticky mobile CTA bar -->
+<div class="mobcta" id="mobCta">
+  <div class="mt-txt"><b>Back-Office Employee</b><small>From $297/mo · Cancel anytime</small></div>
+  <a class="btn btn-p" href="#pricing">Get Pro — $297</a>
+</div>
+
+<script>
+  // Signed-in visitors on the landing page get sent straight into their workspace
+  if (document.cookie.indexOf("portal_session") !== -1) { location.href = "/app"; }
+
+  // Header shadow on scroll
+  var h = document.querySelector("header");
+  window.addEventListener("scroll", function(){ h.classList.toggle("scrolled", window.scrollY > 8); }, {passive:true});
+
+  // Mobile nav
+  var burger = document.getElementById("navBurger");
+  var links = document.getElementById("navLinks");
+  burger.addEventListener("click", function(){ links.classList.toggle("open"); });
+  links.querySelectorAll("a").forEach(function(a){ a.addEventListener("click", function(){ links.classList.remove("open"); }); });
+
+  // FAQ accordion
+  function toggleFaq(btn){
+    var item = btn.parentElement;
+    var a = item.querySelector(".faq-a");
+    var open = item.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach(function(i){ i.classList.remove("open"); i.querySelector(".faq-a").style.maxHeight = null; });
+    if (!open){ item.classList.add("open"); a.style.maxHeight = a.scrollHeight + "px"; }
+  }
+
+  // Live timeline: reveal feed items one by one, then loop
+  (function(){
+    var items = document.querySelectorAll("#demoBody .feed-item");
+    var idx = 0, started = false;
+    function tick(){
+      if (idx >= items.length){ setTimeout(function(){ idx = 0; items.forEach(function(i){ i.classList.remove("show"); }); setTimeout(tick, 900); }, 6000); return; }
+      items[idx].classList.add("show");
+      idx++;
+      setTimeout(tick, 1800);
+    }
+    setTimeout(tick, 1200);
+  })();
+
+  // Sticky mobile CTA: appear after scrolling past the hero demo, hide near pricing
+  (function(){
+    var bar = document.getElementById("mobCta");
+    var pricing = document.getElementById("pricing");
+    var demo = document.querySelector(".demo-wrap");
+    var shown = false;
+    function onScroll(){
+      var y = window.scrollY;
+      if (!shown){
+        var trigger = demo ? demo.offsetTop + demo.offsetHeight * 0.6 : window.innerHeight;
+        if (y > trigger){ bar.classList.add("show"); shown = true; }
+      }
+      if (shown && pricing){
+        var pr = pricing.getBoundingClientRect();
+        // hide while the pricing section itself is in view (its own CTAs are there)
+        if (pr.top < window.innerHeight * 0.75 && pr.bottom > 0){ bar.classList.remove("show"); }
+        else { bar.classList.add("show"); }
+      }
+    }
+    window.addEventListener("scroll", onScroll, {passive:true});
+    onScroll();
+  })();
+
+  document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

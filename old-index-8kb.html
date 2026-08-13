@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diazites — Your AI Back-Office Employee</title>
+<meta name="description" content="Your AI voice agent answers every call. Your AI back-office employee follows up every lead, sends the reminders, and remembers every customer — 24/7, in writing.">
+<style>
+  :root{--bg:#0b0f17;--card:#121826;--card2:#0e1420;--line:#1f2a3d;--txt:#e8edf6;--mut:#8b96ab;--acc:#4f8cff;--acc2:#6ee7b7;--warn:#ffb454}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+  header{padding:22px 0;border-bottom:1px solid var(--line)}
+  .logo{font-weight:800;font-size:19px;letter-spacing:.3px}
+  .logo span{color:var(--acc)}
+  .nav{float:right;font-size:14px}
+  .nav a{color:var(--mut);text-decoration:none;margin-left:18px}
+  .nav a:hover{color:var(--txt)}
+  .hero{padding:74px 0 46px;text-align:center}
+  .hero h1{font-size:clamp(30px,5.4vw,52px);line-height:1.12;font-weight:800;letter-spacing:-.5px}
+  .hero h1 em{color:var(--acc);font-style:normal}
+  .hero p{color:var(--mut);max-width:640px;margin:18px auto 0;font-size:clamp(15px,2vw,18px)}
+  .cta-row{display:flex;gap:12px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:13px 26px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:0}
+  .btn-p{background:var(--acc);color:#fff}
+  .btn-p:hover{background:#5f97ff}
+  .btn-g{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  .btn-g:hover{border-color:var(--acc)}
+  .proof{margin:34px auto 0;max-width:560px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;font-size:13.5px;color:var(--mut);text-align:left}
+  .proof b{color:var(--txt)}
+  .proof .row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line)}
+  .proof .row:last-child{border-bottom:0}
+  .dot{width:8px;height:8px;border-radius:50%;flex:0 0 8px}
+  .d1{background:var(--acc2)}.d2{background:var(--warn)}.d3{background:#ff7b9c}
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:44px 0 20px}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 24px;display:flex;flex-direction:column}
+  .plan.pop{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc) inset}
+  .plan .tag{font-size:12px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut)}
+  .plan.pop .tag{color:var(--acc)}
+  .plan h3{font-size:22px;margin:6px 0 2px}
+  .plan .price{font-size:34px;font-weight:800;margin:8px 0 2px}
+  .plan .price small{font-size:14px;color:var(--mut);font-weight:500}
+  .plan .desc{color:var(--mut);font-size:13.5px;margin-bottom:14px;min-height:40px}
+  .plan ul{list-style:none;margin:0 0 18px;flex:1}
+  .plan li{font-size:13.5px;padding:5px 0 5px 22px;position:relative;color:#c7d0e0}
+  .plan li:before{content:"✓";position:absolute;left:0;color:var(--acc2);font-weight:800}
+  .plan form{margin-top:auto}
+  .plan input{width:100%;padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:var(--card2);color:var(--txt);font-size:14px;margin-bottom:9px}
+  .plan input:focus{outline:none;border-color:var(--acc)}
+  .plan .btn{width:100%;text-align:center}
+  footer{padding:40px 0 60px;text-align:center;color:var(--mut);font-size:13px}
+  footer a{color:var(--mut)}
+  .trybox{text-align:center;margin:14px 0 6px}
+  .trybox a{color:var(--acc2);text-decoration:none;font-weight:700;font-size:15px}
+  @media(max-width:600px){.nav{float:none;display:block;margin-top:10px}.nav a{margin-left:0;margin-right:14px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="logo">Diazites<span>.</span></div>
+  <div class="nav"><a href="#plans">Plans</a><a href="/auth/login">Sign in</a></div>
+</div></header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>Your voice agent answers calls.<br><em>This employee does the rest.</em></h1>
+    <p>Your Diazites AI already answers every call, books the job, and texts the customer. Now add the back-office employee that never clocks out: it follows up every lead, sends the reminders, does the research, and remembers every customer — in writing, 24/7.</p>
+    <div class="cta-row">
+      <a class="btn btn-g" href="/app">▶ Try it now — no sign-up</a>
+      <a class="btn btn-p" href="#plans">See plans</a>
+    </div>
+    <div class="proof">
+      <div class="row"><span class="dot d1"></span><span><b>3:12 PM</b> — Missed call from Maria (roof estimate)</span></div>
+      <div class="row"><span class="dot d2"></span><span><b>3:13 PM</b> — Follow-up text sent: "Hi Maria, saw your call — quoting your roof now…"</span></div>
+      <div class="row"><span class="dot d3"></span><span><b>3:30 PM</b> — Quote drafted + reminder set to re-quote in 6 months. Nobody lifted a finger.</span></div>
+    </div>
+  </section>
+
+  <section class="plans" id="plans">
+    <div class="plan">
+      <div class="tag">Starter</div>
+      <h3>Voice Agent</h3>
+      <div class="price">$97<small>/mo</small></div>
+      <div class="desc">The AI receptionist — answers 24/7, books jobs, texts customers.</div>
+      <ul>
+        <li>AI answers every call</li>
+        <li>Books jobs & sends confirmations</li>
+        <li>Missed-call auto-SMS</li>
+        <li>Your voice, your script</li>
+      </ul>
+      <form action="/qm-checkout" method="get">
+        <input type="hidden" name="plan" value="starter">
+        <input type="email" name="email" placeholder="you@yourbusiness.com" required>
+        <button class="btn btn-g" type="submit">Get Starter</button>
+      </form>
+    </div>
+
+    <div class="plan pop">
+      <div class="tag">Most popular</div>
+      <h3>Pro — Back-Office Employee</h3>
+      <div class="price">$297<small>/mo</small></div>
+      <div class="desc">Voice + the employee that keeps working after the call.</div>
+      <ul>
+        <li>Everything in Starter</li>
+        <li>Follows up every lead in writing</li>
+        <li>Remembers every customer & conversation</li>
+        <li>Sends quotes, reminders, re-quotes</li>
+        <li>Research & scheduled tasks</li>
+        <li>Your own private AI workspace</li>
+      </ul>
+      <form action="/qm-checkout" method="get">
+        <input type="hidden" name="plan" value="pro">
+        <input type="email" name="email" placeholder="you@yourbusiness.com" required>
+        <button class="btn btn-p" type="submit">Get Pro — $297/mo</button>
+      </form>
+    </div>
+
+    <div class="plan">
+      <div class="tag">Premium</div>
+      <h3>Multi-Line + Automation</h3>
+      <div class="price">$497<small>/mo</small></div>
+      <div class="desc">Pro, multiplied across your locations and niches.</div>
+      <ul>
+        <li>Everything in Pro</li>
+        <li>Multiple phone lines</li>
+        <li>Custom niche automations</li>
+        <li>Re-quote engine (old estimates)</li>
+        <li>Priority onboarding & support</li>
+      </ul>
+      <form action="/qm-checkout" method="get">
+        <input type="hidden" name="plan" value="premium">
+        <input type="email" name="email" placeholder="you@yourbusiness.com" required>
+        <button class="btn btn-g" type="submit">Get Premium — $497/mo</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="trybox"><a href="/app">▶ Already paying? Try your AI employee free for 5 minutes — no sign-up</a></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    Diazites — AI voice & back-office agents for local businesses.<br>
+    <a href="/auth/login">Sign in</a> · <a href="mailto:diazites.ai@gmail.com">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // Signed-in visitors on the landing page get sent straight into their workspace
+  if (document.cookie.indexOf("portal_session") !== -1) { location.href = "/app"; }
+</script>
+</body>
+</html>
