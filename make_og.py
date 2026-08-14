@@ -77,11 +77,11 @@ draw.text((180, 66), "Diazites", font=font(F_XB, 40), fill=TXT)
 draw.text((335, 66), ".", font=font(F_XB, 40), fill=ACC)
 
 # ---- headline ----
-draw.text((70, 230), "Your voice agent takes the call.", font=font(F_XB, 62), fill=TXT)
-draw.text((70, 310), "This employee closes the loop.", font=font(F_XB, 62), fill=ACC)
+draw.text((70, 230), "Hire an AI employee", font=font(F_XB, 62), fill=TXT)
+draw.text((70, 310), "that never clocks out.", font=font(F_XB, 62), fill=ACC)
 
 # ---- subline ----
-draw.text((70, 420), "Answers every call  ·  Follows up every lead  ·  Remembers every customer", font=font(F_REG, 28), fill=MUT)
+draw.text((70, 420), "Answers calls  ·  Follows up leads  ·  Sends reminders  ·  Never forgets a customer", font=font(F_REG, 28), fill=MUT)
 
 # ---- CTA pill ----
 px, py, pw, ph = 70, 500, 300, 62
